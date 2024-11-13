@@ -1,0 +1,554 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.discordsrv</groupId>
+    <artifactId>discordsrv</artifactId>
+    <version>1.28.1</version>
+    <name>DiscordSRV</name>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <adventure.version>4.17.0</adventure.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>mavenCentral</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+        <repository>
+            <id>spigot-snapshots</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>papermc</id>
+            <url>https://papermc.io/repo/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+        <repository>
+            <id>sonatype-snapshots-s01</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+        <repository>
+            <id>scarsz-public</id>
+            <url>https://nexus.scarsz.me/content/groups/public/</url>
+        </repository>
+    </repositories>
+
+
+    <dependencies>
+        <!-- Paper API -->
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.21.1-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.code.gson</groupId>
+                    <artifactId>gson</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- JDA -->
+        <dependency>
+            <groupId>net.dv8tion</groupId>
+            <artifactId>JDA</artifactId>
+            <version>4.4.1_DiscordSRV.fix-6</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.protobuf</groupId>
+                    <artifactId>protobuf-java</artifactId>
+                </exclusion>
+                <exclusion>
+                  <groupId>club.minnced</groupId>
+                  <artifactId>opus-java</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.squareup.okio</groupId>
+                    <artifactId>okio</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Config -->
+        <dependency>
+            <groupId>github.scarsz</groupId>
+            <artifactId>configuralize</artifactId>
+            <version>1.4.0</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>me.scarsz.jdaappender</groupId>
+            <artifactId>jda4</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>1.7.36</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.36</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.23.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Adventure API -->
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-api</artifactId>
+            <version>${adventure.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-text-minimessage</artifactId>
+            <version>${adventure.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-text-serializer-legacy</artifactId>
+            <version>${adventure.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-text-serializer-plain</artifactId>
+            <version>${adventure.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-text-serializer-gson</artifactId>
+            <version>${adventure.version}</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.code.gson</groupId>
+                    <artifactId>gson</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-platform-bukkit</artifactId>
+            <version>4.3.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.vankka</groupId>
+            <artifactId>mcdiscordreserializer</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+
+        <!-- Annotations -->
+
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>23.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Lombok -->
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Apache Commons, guava -->
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.14.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.2</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.15</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>33.3.1-jre</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- DynamicProxy -->
+        <dependency>
+            <groupId>dev.vankka</groupId>
+            <artifactId>dynamicproxy-runtime</artifactId>
+            <version>1.0.1-20240720.141742-6</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.vankka</groupId>
+            <artifactId>dynamicproxy</artifactId>
+            <version>1.0.1-20240720.141742-8</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- MySQL -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.28</version> <!-- NEWER than CraftBukkit's -->
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.protobuf</groupId>
+                    <artifactId>protobuf-java</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Misc libraries -->
+        <dependency>
+            <groupId>com.vdurmont</groupId>
+            <artifactId>emoji-java</artifactId>
+            <version>5.1.1</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.json</groupId>
+                    <artifactId>json</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>2.2.1</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.zafarkhaja</groupId>
+            <artifactId>java-semver</artifactId>
+            <version>0.9.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.kevinsawicki</groupId>
+            <artifactId>http-request</artifactId>
+            <version>6.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.minidns</groupId>
+            <artifactId>minidns-hla</artifactId>
+            <version>1.0.4</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hrakaroo</groupId>
+            <artifactId>glob</artifactId>
+            <version>0.9.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>6.0.8</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-jcl</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--
+            Plugin Hooks
+        -->
+
+        <dependency>
+            <groupId>ru.mrbrikster</groupId>
+            <artifactId>chatty-api</artifactId>
+            <version>2.18.2</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>br.com.finalcraft</groupId>
+            <artifactId>fancychat</artifactId>
+            <version>1.0.2</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dthielke.herochat</groupId>
+            <artifactId>Herochat</artifactId>
+            <version>5.6.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>br.com.devpaulo</groupId>
+            <artifactId>legendchat</artifactId>
+            <version>1.1.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.ucchyocean.lc</groupId>
+            <artifactId>LunaChat</artifactId>
+            <version>3.0.16</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.nickuc.chat</groupId>
+            <artifactId>nchat-api</artifactId>
+            <version>5.6</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.palmergames.bukkit</groupId>
+            <artifactId>TownyChat</artifactId>
+            <version>0.45</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>mineverse.aust1n46</groupId>
+            <artifactId>venturechat</artifactId>
+            <version>2.20.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.comphenix.protocol</groupId>
+            <artifactId>ProtocolLib</artifactId>
+            <version>4.5.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Vanish Hooks -->
+        <dependency>
+            <groupId>de.myzelyam</groupId>
+            <artifactId>SuperVanish</artifactId>
+            <version>6.2.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Permission Hooks -->
+        <dependency>
+            <groupId>net.luckperms</groupId>
+            <artifactId>api</artifactId>
+            <version>5.4</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- World Hooks -->
+        <dependency>
+            <groupId>com.onarandombox.MultiverseCore</groupId>
+            <artifactId>Multiverse-Core</artifactId>
+            <version>2.4</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Misc Hooks -->
+        <dependency>
+            <groupId>org.dynmap</groupId>
+            <artifactId>dynmap-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gmail.nossr50</groupId>
+            <artifactId>mcmmo</artifactId>
+            <version>1.5.07</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.milkbowl.vault</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.7</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.10.9</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Debug Hooks  -->
+        <dependency>
+            <groupId>ch.njol</groupId>
+            <artifactId>skript</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JUnit for testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.9.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.9.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Dump to newer version -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.9</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>4.28.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20231013</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okio</groupId>
+            <artifactId>okio</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Compiler plugin for Java version -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.30</version>
+                        </path>
+                        <path>
+                            <groupId>dev.vankka</groupId>
+                            <artifactId>dynamicproxy</artifactId>
+                            <version>1.0.1-20240720.14742-8</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+
+            <!-- JAR plugin configuration -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Build-Date>${maven.build.timestamp}</Build-Date>
+                            <Git-Branch>master</Git-Branch>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
